@@ -13,6 +13,7 @@ module ActiveAdmin
       # Will call "resource.publish!", if "resource.can_publish?" returns true
       #
 
+
       def state_action(action, options={}, &controller_action)
         singular = config.resource_name.singular
         plural = config.resource_name.plural
@@ -51,9 +52,13 @@ module ActiveAdmin
 
         unless block_given?
           controller_action = -> do
-            resource.send("#{action}!")
-            flash[:notice] = t("#{plural}.#{action}.flash.success")
-            redirect_to smart_resource_url
+            events = resource.class.state_machines[params[:attr].to_sym].events
+            if resource.send(action)
+              flash[:notice] = t("#{plural}.#{action}.flash.success", default: t("active_admin-state_machine.flash.success", action: events[action].human_name, resource: resource.model_name.human))
+            else
+              flash[:error] = resource.errors.full_messages.join(", ")
+            end
+            redirect_back(fallback_location: smart_resource_url)
           end
         end
 

@@ -23,6 +23,40 @@ gem 'active_admin-state_machine'
 
 ## Usage
 
+### State Row
+Inspired by and borrows some code from [activeadmin_addons](https://github.com/platanus/activeadmin_addons/blob/master/docs/aasm_integration.md) but for state_machines instead of AASM
+
+```ruby
+show do
+  attributes_table do
+    state :state
+  end
+end
+```
+
+## State Column
+
+```ruby
+index do
+  state :state
+end
+```
+
+The name of the state will be the class name (rejected, approved, etc.), but you can pass a hash of options to map different states with tag colors.
+
+```ruby
+state_column(:state, states: { destroyed: "rejected" })
+```
+
+You will need to define inside `your_app/app/assets/stylesheets/active_admin.css.scss` the following:
+
+```scss
+.status_tag {
+  &.rejected { background: $rejected-color; }
+  &.approved { background: $approved-color; }
+}
+```
+
 You will need to define a state_machine in a model, and have that model registered as a resource with ActiveAdmin.
 
 **A basic model**
