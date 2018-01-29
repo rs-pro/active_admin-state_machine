@@ -1,0 +1,4 @@
+ru:
+  active_admin-state_machine:
+    flash:
+      success: "%{action} выполнено для %{resource}"
