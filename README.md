@@ -1,5 +1,7 @@
 # ActiveAdmin-StateMachine
 
+[![Build Status](https://travis-ci.org/rs-pro/active_admin-state_machine.svg?branch=master)](https://travis-ci.org/rs-pro/active_admin-state_machine)
+
 This gem provides an easy integration between the awesome [state_machine](https://github.com/pluginaweek/state_machine) and [active_admin](https://github.com/gregbell/active_admin) gems.
 
 ## Features
