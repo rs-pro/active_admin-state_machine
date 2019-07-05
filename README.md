@@ -20,7 +20,7 @@ This gem provides you with a DSL extension to ActiveAdmin that allows you to eas
 This gem requires both `active_admin` and `state_machine`.  Add the gem to your Gemfile to get started and bundle.
 
 ```ruby
-gem 'active_admin-state_machine'
+gem 'rs-active_admin-state_machine'
 ```
 
 ## Usage
