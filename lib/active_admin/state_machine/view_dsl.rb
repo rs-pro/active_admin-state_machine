@@ -22,7 +22,6 @@ module ActiveAdmin
               send("#{event}_admin_#{resource.class.model_name.singular}_path", id: resource.id, attr: name),
               method: :put,
               class: "btn event-#{event}",
-              #remote: true,
               style: 'margin-bottom: 5px;'
             )
           end

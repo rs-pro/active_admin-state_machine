@@ -19,6 +19,7 @@ module ActiveAdmin
         plural = config.resource_name.plural
 
         options[:permission] ||= controller.new.send(:action_to_permission, action)
+
         confirmation = options.fetch(:confirm, false)
         if confirmation == true
           default = "Are you sure you want to #{action.to_s.humanize.downcase}?"
@@ -32,9 +33,13 @@ module ActiveAdmin
                            else
                              ["state_action_#{action}", { only: :show }]
                            end
+
         action_item(*action_item_args) do
           if resource.send("can_#{action}?") && authorized?(options[:permission], resource)
-            path = resource_path << "/#{action}"
+
+            attr = options[:attr] || resource.class.state_machines.keys.first || "state"
+            path = resource_path << "/#{action}?#{{attr: attr}.to_query}"
+
             label = I18n.t("#{plural}.#{action}.label", default: action.to_s.titleize)
 
             link_options = {}

@@ -64,8 +64,6 @@ You will need to define a state_machine in a model, and have that model register
 ```
 # app/models/post.rb
 class Post < ActiveRecord::Base
-  attr_accessible :body, :status, :title
-
   validates :title, presence: true, uniqueness: true
   validates :body, presence: true
 
